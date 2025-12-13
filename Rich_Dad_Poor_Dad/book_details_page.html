@@ -80,36 +80,42 @@ body {
 /* ================= BOOK HEADER ================= */
 .book-header {
   display: flex;
+  flex-direction: column; /* MOBILE FIX */
+  align-items: center;
   gap: 16px;
   background: #fff;
-  padding: 16px;
+  padding: 20px;
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.08);
   margin-bottom: 16px;
 }
 
 .book-cover {
-  width: 120px;
+  width: 160px;               /* Bigger on mobile */
   aspect-ratio: 2 / 3;
+  border-radius: 14px;
   overflow: hidden;
-  border-radius: 12px;
-  background: #ddd;
+  background: #f0f2ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .book-cover img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;        /* IMPORTANT FIX */
 }
 
 .book-details {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  text-align: center;         /* Mobile friendly */
 }
 
 .book-title {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 700;
 }
 
@@ -218,7 +224,22 @@ audio {
 
 /* ================= DESKTOP ================= */
 @media (min-width: 768px) {
-  .book-cover { width: 160px; }
+  .book-header {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .book-cover {
+    width: 160px;
+  }
+
+  .book-cover img {
+    object-fit: cover; /* premium look on desktop */
+  }
+
+  .book-details {
+    text-align: left;
+  }
 }
 </style>
 </head>
@@ -235,7 +256,6 @@ audio {
 
 <main class="container">
 
-  <!-- BOOK HEADER -->
   <section class="book-header">
     <div class="book-cover">
       <img src="Cover_Image.png" alt="Book Cover">
@@ -244,22 +264,21 @@ audio {
       <div class="book-title">Rich Dad Poor Dad</div>
       <div class="book-author">Robert T. Kiyosaki</div>
       <div class="book-summary">
-        'Rich Dad Poor Dad' is a revolutionary book written by 'Robert T. Kiyosaki'. Here he reveals the secrets about money that the rich teach their children but the poor and middle class don't.
+        'Rich Dad Poor Dad' is a revolutionary book written by Robert T. Kiyosaki. It reveals what the rich teach their children about money.
       </div>
     </div>
   </section>
 
-  <!-- TOGGLE -->
   <div class="toggle-buttons">
-    <button class="toggle-btn active" onclick="showSection('read')">Read</button>
-    <button class="toggle-btn" onclick="showSection('listen')">Listen</button>
+    <button class="toggle-btn active" onclick="showSection('read', this)">Read</button>
+    <button class="toggle-btn" onclick="showSection('listen', this)">Listen</button>
   </div>
 
-  <!-- READ -->
+  <!--Read-->
   <section id="read" class="section active">
     <div class="section-title">Read</div>
 
-    <a href="#chapter1" class="chapter">
+    <a href="#" class="chapter">
       <div class="chapter-icon">1</div>
       <div class="chapter-text">
         <div class="chapter-name">Chapter 1</div>
@@ -267,7 +286,7 @@ audio {
       </div>
     </a>
 
-    <a href="#chapter2" class="chapter">
+    <a href="#" class="chapter">
       <div class="chapter-icon">2</div>
       <div class="chapter-text">
         <div class="chapter-name">Chapter 2</div>
@@ -276,7 +295,7 @@ audio {
     </a>
   </section>
 
-  <!-- LISTEN -->
+  <!--Listen-->
   <section id="listen" class="section">
     <div class="section-title">Listen</div>
 
@@ -285,7 +304,7 @@ audio {
       <div class="chapter-text">
         <div class="chapter-name">Chapter 1</div>
         <div class="chapter-sub">The Rich Don't Work For Money</div>
-        <audio controls src="#audio1"></audio>
+        <audio controls src="#"></audio>
       </div>
     </div>
 
@@ -294,7 +313,7 @@ audio {
       <div class="chapter-text">
         <div class="chapter-name">Chapter 2</div>
         <div class="chapter-sub">Why Teach Financial Literacy?</div>
-        <audio controls src="#audio2"></audio>
+        <audio controls src="#"></audio>
       </div>
     </div>
   </section>
@@ -302,14 +321,15 @@ audio {
 </main>
 
 <script>
-function showSection(section) {
+function showSection(id, btn) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-
-  document.getElementById(section).classList.add('active');
-  event.target.classList.add('active');
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
 }
 </script>
 
 </body>
 </html>
+
+
