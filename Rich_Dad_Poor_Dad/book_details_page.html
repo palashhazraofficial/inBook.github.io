@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>inBooks – Book Details</title>
+
+<style>
+:root {
+  --blue-main: #0d47ff;
+  --blue-soft: #e8edff;
+  --text-dark: #1a1a1a;
+  --card-bg: #ffffff;
+  --border-soft: #dde3ff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+  background: var(--blue-soft);
+  color: var(--text-dark);
+  padding-top: 72px;
+}
+
+/* ================= TOP BAR ================= */
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 72px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--blue-main);
+}
+
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--blue-main), #5c7cff);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.home-link {
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--blue-main);
+}
+
+/* ================= MAIN ================= */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px;
+}
+
+/* ================= BOOK HEADER ================= */
+.book-header {
+  display: flex;
+  gap: 16px;
+  background: #fff;
+  padding: 16px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  margin-bottom: 16px;
+}
+
+.book-cover {
+  width: 120px;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #ddd;
+}
+
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.book-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.book-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.book-author {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.book-summary {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* ================= TOGGLE BUTTONS ================= */
+.toggle-buttons {
+  display: flex;
+  background: #fff;
+  border-radius: 16px;
+  padding: 6px;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.toggle-btn {
+  flex: 1;
+  border: none;
+  padding: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--blue-main);
+  transition: all 0.25s ease;
+}
+
+.toggle-btn.active {
+  background: linear-gradient(135deg, var(--blue-main), #5c7cff);
+  color: #fff;
+}
+
+/* ================= SECTIONS ================= */
+.section {
+  display: none;
+  background: #fff;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.section.active {
+  display: block;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--blue-main);
+}
+
+.chapter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  margin-bottom: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.chapter-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--blue-main), #5c7cff);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.chapter-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.chapter-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.chapter-sub {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+audio {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* ================= DESKTOP ================= */
+@media (min-width: 768px) {
+  .book-cover { width: 160px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="top-bar">
+  <a href="../index.html" class="home-link">Home</a>
+  <div class="logo">
+    <div class="logo-icon">in</div> inBooks
+  </div>
+  <div style="width:40px"></div>
+</header>
+
+<main class="container">
+
+  <!-- BOOK HEADER -->
+  <section class="book-header">
+    <div class="book-cover">
+      <img src="Cover_Image.png" alt="Book Cover">
+    </div>
+    <div class="book-details">
+      <div class="book-title">Rich Dad Poor Dad</div>
+      <div class="book-author">Robert T. Kiyosaki</div>
+      <div class="book-summary">
+        'Rich Dad Poor Dad' is a revolutionary book written by 'Robert T. Kiyosaki'. Here he reveals the secrets about money that the rich teach their children but the poor and middle class don't.
+      </div>
+    </div>
+  </section>
+
+  <!-- TOGGLE -->
+  <div class="toggle-buttons">
+    <button class="toggle-btn active" onclick="showSection('read')">Read</button>
+    <button class="toggle-btn" onclick="showSection('listen')">Listen</button>
+  </div>
+
+  <!-- READ -->
+  <section id="read" class="section active">
+    <div class="section-title">Read</div>
+
+    <a href="#chapter1" class="chapter">
+      <div class="chapter-icon">1</div>
+      <div class="chapter-text">
+        <div class="chapter-name">Chapter 1</div>
+        <div class="chapter-sub">The Rich Don't Work For Money</div>
+      </div>
+    </a>
+
+    <a href="#chapter2" class="chapter">
+      <div class="chapter-icon">2</div>
+      <div class="chapter-text">
+        <div class="chapter-name">Chapter 2</div>
+        <div class="chapter-sub">Why Teach Financial Literacy?</div>
+      </div>
+    </a>
+  </section>
+
+  <!-- LISTEN -->
+  <section id="listen" class="section">
+    <div class="section-title">Listen</div>
+
+    <div class="chapter">
+      <div class="chapter-icon">▶</div>
+      <div class="chapter-text">
+        <div class="chapter-name">Chapter 1</div>
+        <div class="chapter-sub">The Rich Don't Work For Money</div>
+        <audio controls src="#audio1"></audio>
+      </div>
+    </div>
+
+    <div class="chapter">
+      <div class="chapter-icon">▶</div>
+      <div class="chapter-text">
+        <div class="chapter-name">Chapter 2</div>
+        <div class="chapter-sub">Why Teach Financial Literacy?</div>
+        <audio controls src="#audio2"></audio>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+function showSection(section) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+
+  document.getElementById(section).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>
