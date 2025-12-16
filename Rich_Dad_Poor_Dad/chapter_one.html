@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lesson Reel - inBooks</title>
+
+<style>
+:root {
+  --blue-main: #0d47ff;
+  --blue-dark: #0a36cc;
+  --overlay-dark: rgba(0,0,0,0.45);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: #000;
+  overflow: hidden;
+}
+
+/* ================= REELS WRAPPER ================= */
+.reels {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.reels::-webkit-scrollbar {
+  display: none;
+}
+
+/* ================= SINGLE REEL ================= */
+.reel {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  scroll-snap-align: start;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+}
+
+/* Overlay */
+.reel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-dark);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ================= BACK BUTTON ================= */
+.back-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.back-btn span {
+  font-size: 1.4rem;
+}
+
+/* ================= CONTENT ================= */
+.reel-content {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  max-width: 620px;
+}
+
+.reel-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.reel-text {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* ================= END SCREEN ================= */
+.end-screen {
+  background: linear-gradient(135deg, var(--blue-main), var(--blue-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.end-box {
+  color: #fff;
+  padding: 24px;
+}
+
+.end-title {
+  font-size: 1.9rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.end-text {
+  font-size: 1rem;
+  margin-bottom: 28px;
+}
+
+.end-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.end-btn {
+  padding: 14px 24px;
+  border-radius: 18px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+}
+
+.read-again {
+  background: #fff;
+  color: var(--blue-main);
+}
+
+.go-chapters {
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+}
+
+/* ================= DESKTOP ================= */
+@media (min-width: 768px) {
+  .reel-title {
+    font-size: 1.6rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="reels" id="reels">
+
+  <!-- REEL 1 -->
+  <section class="reel" id="lesson-1"
+    style="background-image:url('chapter1_lesson1.jpg');">
+    <a href="book_details_page.html" class="back-btn">
+      <span>←</span> Back
+    </a>
+    <div class="reel-content">
+      <div class="reel-title">Lesson 1</div>
+      <div class="reel-text">
+        Poor People work hard 24x7 at a job and wait for their pay-check. In the other hand, Rich People invest their money in real-estate, businesses and watch how money works for them.
+      </div>
+    </div>
+  </section>
+
+  <!-- REEL 2 -->
+  <section class="reel"
+    style="background-image:url('https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d');">
+    <a href="book_details_page.html" class="back-btn">
+      <span>←</span> Back
+    </a>
+    <div class="reel-content">
+      <div class="reel-title">Lesson 2</div>
+      <div class="reel-text">
+        Financial literacy is the foundation of long-term wealth and freedom.
+      </div>
+    </div>
+  </section>
+
+  <!-- REEL 3 -->
+  <section class="reel"
+    style="background-image:url('https://images.unsplash.com/photo-1553729459-efe14ef6055d');">
+    <a href="book_details_page.html" class="back-btn">
+      <span>←</span> Back
+    </a>
+    <div class="reel-content">
+      <div class="reel-title">Lesson 3</div>
+      <div class="reel-text">
+        Assets put money into your pocket. Liabilities take money out.
+      </div>
+    </div>
+  </section>
+
+  <!-- END SCREEN -->
+  <section class="reel end-screen">
+    <div class="end-box">
+      <div class="end-title">Chapter Complete 🎉</div>
+      <div class="end-text">You've finished this chapter.</div>
+
+      <div class="end-actions">
+        <button class="end-btn read-again" id="readAgainBtn">
+          Read Again
+        </button>
+        <button class="end-btn go-chapters" id="goChaptersBtn">
+          Go To Chapters
+        </button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const reels = document.getElementById("reels");
+const readAgainBtn = document.getElementById("readAgainBtn");
+const goChaptersBtn = document.getElementById("goChaptersBtn");
+
+/* Read Again → scroll to first reel */
+readAgainBtn.addEventListener("click", () => {
+  reels.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+});
+
+/* Go To Chapters → redirect */
+goChaptersBtn.addEventListener("click", () => {
+  window.location.href = "book_details_page.html";
+});
+</script>
+
+</body>
+</html>
+
